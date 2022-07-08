@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -22,5 +24,9 @@ public class PersonajeEntity {
     private Long edad;
     private Long peso;
     private String historia;
+
+    //mappedBy, dejar que tabla intermedia sea responsabilidad de personajes
+    @ManyToMany(mappedBy="personajes", cascade = CascadeType.ALL)
+    private Set<PeliculaEntity> peliculas = new HashSet<>();
 
 }

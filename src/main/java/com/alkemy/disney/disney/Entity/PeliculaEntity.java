@@ -4,10 +4,13 @@ package com.alkemy.disney.disney.Entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.JoinColumnOrFormula;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
@@ -33,7 +36,24 @@ public class PeliculaEntity {
     @Max(value=5)
     private Long calificacion;
 
-    //personajes asociados
-    //@ManyToOne
+    //buscar informarcion, va a traer obj genero entero por fetch type eager
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "genero_id", updatable = false, insertable = false)
+    private GeneroEntity genero;
+
+    //
+    @Column(name = "genero_id", nullable = false)
+    private Long generoId;
+
+
+
+    @ManyToMany(
+            cascade = {CascadeType.ALL, CascadeType.MERGE})
+    @JoinTable(
+            name = "personaje_pelicula",
+            joinColumns = @JoinColumn( name = "pelicula_id"),
+            inverseJoinColumns = @JoinColumn(name = "personaje_id"))
+    private Set<PersonajeEntity> personajes = new HashSet<>();
+
 
 }
