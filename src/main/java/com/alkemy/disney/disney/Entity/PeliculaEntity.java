@@ -4,7 +4,6 @@ package com.alkemy.disney.disney.Entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.JoinColumnOrFormula;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -37,11 +36,12 @@ public class PeliculaEntity {
     private Long calificacion;
 
 
-    //buscar informarcion, va a traer obj genero entero por fetch type eager
+    //fetch type eager makes the continent data available to work with
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "genero_id", updatable = false, insertable = false)
     private GeneroEntity genero;
 
+    // mostly for insert/delete
     @Column(name = "genero_id", nullable = false)
     private Long generoId;
 

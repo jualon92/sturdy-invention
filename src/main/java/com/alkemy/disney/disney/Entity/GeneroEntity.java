@@ -22,7 +22,7 @@ public class GeneroEntity {
 
 
     /*
-    // oneToMany bidirectional, table responsible to create column with field peliculas
+    // oneToMany bidirectional, PeliculaEntity as owner-side in the relationship
     @OneToMany(mappedBy="genero", cascade = CascadeType.ALL)
     private Set <PeliculaEntity> peliculas = new HashSet<>();
     */
