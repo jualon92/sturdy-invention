@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -21,9 +22,9 @@ public class GeneroEntity {
 
 
     /*
-    // oneToMany bidirectional
-    @OneToMany(mapped by="pelicula")
-    private Set<PeliculaEntity> peliculas = new HashSet<PeliculaEntity>();
+    // oneToMany bidirectional, table responsible to create column with field peliculas
+    @OneToMany(mappedBy="genero", cascade = CascadeType.ALL)
+    private Set <PeliculaEntity> peliculas = new HashSet<>();
     */
 
 

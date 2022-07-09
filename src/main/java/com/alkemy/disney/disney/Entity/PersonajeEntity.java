@@ -25,7 +25,7 @@ public class PersonajeEntity {
     private Long peso;
     private String historia;
 
-    //mappedBy, dejar que tabla intermedia sea responsabilidad de personajes
+    //mappedBy, dejar que tabla intermedia sea responsabilidad de field personajes
     @ManyToMany(mappedBy="personajes", cascade = CascadeType.ALL)
     private Set<PeliculaEntity> peliculas = new HashSet<>();
 

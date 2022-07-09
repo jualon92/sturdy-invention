@@ -36,16 +36,19 @@ public class PeliculaEntity {
     @Max(value=5)
     private Long calificacion;
 
+
     //buscar informarcion, va a traer obj genero entero por fetch type eager
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "genero_id", updatable = false, insertable = false)
     private GeneroEntity genero;
 
-    //
     @Column(name = "genero_id", nullable = false)
     private Long generoId;
 
-
+    /*
+    @ManyToOne
+    private GeneroEntity genero;
+    */
 
     @ManyToMany(
             cascade = {CascadeType.ALL, CascadeType.MERGE})
