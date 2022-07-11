@@ -46,10 +46,10 @@ public class PersonajeController {
     }
 
     //adds movie
-
+    /*
     @PostMapping("{id}/pelicula/{idPelicula}")
     public ResponseEntity<Void> addPelicula(@PathVariable Long id, @PathVariable Long idPelicula){
         personajeService.addPelicula(id, idPelicula);
         return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
+    }*/
 }
