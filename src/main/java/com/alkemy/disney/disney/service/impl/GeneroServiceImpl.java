@@ -27,7 +27,7 @@ public class GeneroServiceImpl implements GeneroService {
 
 
     }
-    public GeneroDTO save(GeneroDTO dto){
+    public GeneroDTO save(GeneroDTO dto){ //create
         //TODO: save Entity and return new GeneroDTO
         //use mapper to generate a new entity and save it with repo.
         GeneroEntity generoEntity = generoMapper.generoDTO2Entity(dto); //asign new entity
