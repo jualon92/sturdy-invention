@@ -13,4 +13,5 @@ public class PersonajeDTO { //plain class
     private Long edad;
     private Long peso;
     private String historia;
+
 }
