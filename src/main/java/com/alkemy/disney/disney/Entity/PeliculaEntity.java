@@ -8,7 +8,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -56,7 +58,7 @@ public class PeliculaEntity {
             name = "personaje_pelicula",
             joinColumns = @JoinColumn( name = "pelicula_id"),
             inverseJoinColumns = @JoinColumn(name = "personaje_id"))
-    private Set<PersonajeEntity> personajes = new HashSet<>();
+    private List<PersonajeEntity> personajes = new ArrayList<>();
 
 
 }

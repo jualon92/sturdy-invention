@@ -38,18 +38,16 @@ public class PersonajeServiceImpl implements PersonajeService{
         PersonajeEntity entitySaved = personajeRepository.save(personajeEntity);
 
         //generate a new dto from previous entity via mapper
-        PersonajeDTO newDTO = personajeMapper.personajeEntity2DTO(entitySaved);
+        PersonajeDTO newDTO = personajeMapper.personajeEntity2DTO(entitySaved, false);
         System.out.println("GUARDAR PERSONAJE");
         return newDTO ;
     }
 
 
     public List<PersonajeDTO> getAllPersonajes(){
-        List<PersonajeEntity> personajesEntities = personajeRepository.findAll();
-        List<PersonajeDTO> personajesDTO = personajeMapper.personajeEntity2DTOList(personajesEntities);
+        List<PersonajeEntity> personajesEntities = (List<PersonajeEntity>) personajeRepository.findAll();
+        List<PersonajeDTO> personajesDTO = personajeMapper.personajeEntity2DTOList(personajesEntities,true);
         return personajesDTO;
-
-
     }
 
 
@@ -57,32 +55,77 @@ public class PersonajeServiceImpl implements PersonajeService{
 
 
         Optional<PersonajeEntity> foundEntity = personajeRepository.findById(id);
+        System.out.println(foundEntity.get().getPeliculas());
+
         if (!foundEntity.isPresent()){
             throw new ParamNotFound("Id personaje no valida"); // rest exception handler should catch param not found
         }
+      //  System.out.println("ya");
+      //  System.out.println(foundEntity.get().getId());
 
-        PersonajeDTO dto = personajeMapper.personajeEntity2DTO(foundEntity.get());
-         
+         PersonajeDTO dto = personajeMapper.personajeEntity2DTO(foundEntity.get(), true);
+      //  System.out.println(personajeRepository.findByPelicula_id(foundEntity));
         return dto;
 
     }
 
+    public PersonajeDTO update(Long id, PersonajeDTO personajeDTO){
+        Optional<PersonajeEntity> foundEntity = personajeRepository.findById(id);
+        if (!foundEntity.isPresent()){
+            throw new ParamNotFound("Id personaje no valida"); // rest exception handler should catch param not found
+        }
+
+        PersonajeEntity personajeEntity = foundEntity.get();
+        personajeMapper.updateAtributes(personajeEntity, personajeDTO);
+        personajeRepository.save(personajeEntity);
+
+        return personajeMapper.personajeEntity2DTO(personajeEntity, true);
+    }
+
+    public void delete(Long id){
+
+        //checks if it exists in the first place
+        Optional<PersonajeEntity> foundEntity = personajeRepository.findById(id);
+        if (!foundEntity.isPresent()){
+            throw new ParamNotFound("Id personaje no valida"); // rest exception handler should catch param not found
+        }
+
+
+        //soft delete
+        personajeRepository.deleteById(id);
+
+    }
 
     //ADD PELICULA
-    public PersonajeDTO addPelicula(Long id, Long idPelicula){
-        Optional<PersonajeEntity> foundPersonaje= personajeRepository.findById(id);
+    public void addPelicula(Long id, Long idPelicula){
+
+        Optional<PersonajeEntity> foundPersonaje= personajeRepository.findById(id);  //dos entities buscadas
         Optional<PeliculaEntity> foundPelicula = peliculaRepository.findById(idPelicula);
+        System.out.println("pre");
+        System.out.println(personajeRepository.findById(id).get().getPeliculas());
+        if (!foundPersonaje.isPresent()){
+            throw new ParamNotFound("Id personaje no valida"); // rest exception handler should catch param not found
+        }
+        if (!foundPelicula.isPresent()){
+            throw new ParamNotFound("Id pelicula no valida"); // rest exception handler should catch param not found
+        }
 
-        PersonajeEntity personaje = foundPersonaje.get();
-        PeliculaEntity pelicula = foundPelicula.get();
+        foundPersonaje.get().getPeliculas().size();
+        foundPelicula.get().getPersonajes().size();
 
-        personaje.getPeliculas().add(pelicula);
-
-
-        PersonajeDTO dto = personajeMapper.personajeEntity2DTO(personaje);
-        this.save(dto);
-        return dto;
+        PersonajeEntity personajeEntity = foundPersonaje.get();
+        PeliculaEntity peliculaEntity = foundPelicula.get();
 
 
+        //update and save
+          personajeEntity.addPelicula(peliculaEntity);
+
+
+          this.personajeRepository.save(personajeEntity);
+
+
+
+        System.out.println("final");
+        System.out.println(personajeRepository.findById(id).get().getPeliculas());
     }
 }

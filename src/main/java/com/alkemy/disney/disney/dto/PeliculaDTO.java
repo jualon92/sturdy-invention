@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,6 +17,6 @@ public class PeliculaDTO {
     private LocalDate fechaDeCreacion;
     private Long calificacion;
     private Long generoId;
-
+    private List<PersonajeDTO> personajes;
 
 }

@@ -10,6 +10,7 @@ import com.alkemy.disney.disney.Entity.PersonajeEntity;
 import com.alkemy.disney.disney.dto.PersonajeDTO;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -17,7 +18,7 @@ import java.util.Set;
 public class PersonajeMapper {
 
     @Autowired
-    PeliculaMapper peliculaMapper;
+    private PeliculaMapper peliculaMapper;
 
     public PersonajeEntity personajeDTO2Entity(PersonajeDTO dto){
         PersonajeEntity personajeEntity = new PersonajeEntity();
@@ -31,7 +32,7 @@ public class PersonajeMapper {
         return personajeEntity;
     }
 
-    public PersonajeDTO personajeEntity2DTO(PersonajeEntity entity){
+    public PersonajeDTO personajeEntity2DTO(PersonajeEntity entity, boolean loadPeliculas){
         PersonajeDTO personajeDTO = new PersonajeDTO();
         personajeDTO.setId(entity.getId());
         personajeDTO.setImagen(entity.getImagen());
@@ -40,13 +41,24 @@ public class PersonajeMapper {
         personajeDTO.setPeso(entity.getPeso());
         personajeDTO.setHistoria(entity.getHistoria());
 
+        if(loadPeliculas){ //
+            System.out.println(entity.getPeliculas());
+            List<PeliculaDTO> peliculasDTO =  peliculaMapper.peliculaEntity2DTOList(entity.getPeliculas(), false); //dont load icons
+            System.out.println("Inner");
+            System.out.println(peliculasDTO);
+            personajeDTO.setPeliculas(peliculasDTO);
+        }
 
-        Set<PeliculaDTO> peliculaDTO = peliculaMapper.peliculaEntity2DTOList(entity.getPeliculas());   //lista entity peliculas a set peliculas
-        personajeDTO.setPeliculas(peliculaDTO);
         return personajeDTO;
     }
+    public void updateAtributes(PersonajeEntity personajeEntity, PersonajeDTO personajeFinal){
+        personajeEntity.setEdad(personajeFinal.getEdad());
+        personajeEntity.setHistoria(personajeFinal.getHistoria());
+        personajeEntity.setImagen(personajeFinal.getImagen());
+        personajeEntity.setNombre(personajeFinal.getNombre());
 
-    public List<PersonajeDTO> personajeEntity2DTOList(List<PersonajeEntity> entitiesIniciales){
+    }
+    public List<PersonajeDTO> personajeEntity2DTOList(Collection<PersonajeEntity> entitiesIniciales){
 
         List<PersonajeDTO> dtosFinal = new ArrayList<PersonajeDTO>();
 
@@ -59,7 +71,30 @@ public class PersonajeMapper {
 
         for (PersonajeEntity personaje: entitiesIniciales
         ) {
-            PersonajeDTO newDTO = personajeEntity2DTO(personaje);
+            PersonajeDTO newDTO = personajeEntity2DTO(personaje,false);
+            dtosFinal.add(newDTO);
+
+        }
+
+
+        return dtosFinal;
+    }
+
+
+    public List<PersonajeDTO> personajeEntity2DTOList(Collection<PersonajeEntity> entitiesIniciales, boolean loadPeliculas){
+
+        List<PersonajeDTO> dtosFinal = new ArrayList<PersonajeDTO>();
+
+        /*
+        for (int i = 0; i < entitiesIniciales.size(); i++){
+            //converts entity to dto
+            GeneroDTO nuevoDTO = generoEntity2DTO(entities.get(i));
+            dtosFinal.add(nuevoDTO);
+        }*/
+
+        for (PersonajeEntity personaje: entitiesIniciales
+        ) {
+            PersonajeDTO newDTO = personajeEntity2DTO(personaje,loadPeliculas);
             dtosFinal.add(newDTO);
 
         }

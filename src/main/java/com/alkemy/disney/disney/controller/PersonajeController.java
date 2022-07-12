@@ -1,5 +1,6 @@
 package com.alkemy.disney.disney.controller;
 
+import com.alkemy.disney.disney.Entity.PersonajeEntity;
 import com.alkemy.disney.disney.dto.GeneroDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import com.alkemy.disney.disney.dto.PersonajeDTO;
 import com.alkemy.disney.disney.service.PersonajeService;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("personajes")
@@ -39,17 +41,39 @@ public class PersonajeController {
     }
 
 
+    //GET ALL
     @GetMapping
     public ResponseEntity<List<PersonajeDTO>> getAll(){
         List<PersonajeDTO> personajes = personajeService.getAllPersonajes();
         return ResponseEntity.ok().body(personajes); // returns if ok and body
     }
 
-    //adds movie
     /*
-    @PostMapping("{id}/pelicula/{idPelicula}")
+    //adds movie to specific character
+    @PostMapping("/{id}/pelicula/{idPelicula}")
     public ResponseEntity<Void> addPelicula(@PathVariable Long id, @PathVariable Long idPelicula){
         personajeService.addPelicula(id, idPelicula);
         return ResponseEntity.status(HttpStatus.CREATED).build();
-    }*/
+    }
+*/
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PersonajeDTO> updatePersonaje(@PathVariable Long id,@RequestBody PersonajeDTO personaje ){
+        PersonajeDTO personajeGuardado = personajeService.update(id,personaje);
+
+        //response 201  + data
+        return ResponseEntity.status(HttpStatus.CREATED).body(personajeGuardado);  //response => header 201 (reason, value, etc) + json
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> updatePersonaje(@PathVariable Long id){
+        personajeService.delete(id);
+
+        //response 201  + data
+        return ResponseEntity.status(HttpStatus.CREATED).build();//response => header 201 (reason, value, etc) + json
+    }
+
+
+
 }
