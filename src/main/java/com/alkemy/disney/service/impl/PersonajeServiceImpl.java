@@ -59,17 +59,13 @@ public class PersonajeServiceImpl implements PersonajeService{
 
 
         Optional<PersonajeEntity> foundEntity = personajeRepository.findById(id);
-        System.out.println("peliculas encontradas");
-        System.out.println(foundEntity.get().getPeliculas());
-
         if (!foundEntity.isPresent()){
             throw new ParamNotFound("Id personaje no valida"); // rest exception handler should catch param not found
         }
-      //  System.out.println("ya");
-      //  System.out.println(foundEntity.get().getId());
+
 
          PersonajeDTO dto = personajeMapper.personajeEntity2DTO(foundEntity.get(), true);
-      //  System.out.println(personajeRepository.findByPelicula_id(foundEntity));
+
         return dto;
 
     }
