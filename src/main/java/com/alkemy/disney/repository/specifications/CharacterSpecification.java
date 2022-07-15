@@ -1,7 +1,7 @@
 package com.alkemy.disney.repository.specifications;
 
-import com.alkemy.disney.Entity.PeliculaEntity;
-import com.alkemy.disney.Entity.PersonajeEntity;
+import com.alkemy.disney.entity.PeliculaEntity;
+import com.alkemy.disney.entity.PersonajeEntity;
 import com.alkemy.disney.dto.PersonajeFiltersDTO;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
@@ -13,7 +13,6 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.criteria.Join;
 

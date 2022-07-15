@@ -1,6 +1,5 @@
 package com.alkemy.disney.service.impl;
 
-import com.alkemy.disney.Entity.PeliculaEntity;
 import com.alkemy.disney.dto.PersonajeDTOBasic;
 import com.alkemy.disney.exception.ParamNotFound;
 import com.alkemy.disney.repository.PeliculaRepository;
@@ -8,7 +7,7 @@ import com.alkemy.disney.repository.PersonajeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alkemy.disney.Entity.PersonajeEntity;
+import com.alkemy.disney.entity.PersonajeEntity;
 import com.alkemy.disney.dto.PersonajeDTO;
 import com.alkemy.disney.mapper.PersonajeMapper;
 import com.alkemy.disney.service.PersonajeService;
@@ -39,9 +38,8 @@ public class PersonajeServiceImpl implements PersonajeService{
         PersonajeEntity entitySaved = personajeRepository.save(personajeEntity);
 
         //generate a new dto from previous entity via mapper
-        PersonajeDTOBasic newDTO = personajeMapper.personajeEntity2DTOBasic(entitySaved);
+        return personajeMapper.personajeEntity2DTOBasic(entitySaved);
 
-        return newDTO ;
     }
 
 
@@ -64,9 +62,9 @@ public class PersonajeServiceImpl implements PersonajeService{
         }
 
 
-         PersonajeDTO dto = personajeMapper.personajeEntity2DTO(foundEntity.get(), true);
+         return personajeMapper.personajeEntity2DTO(foundEntity.get(), true);
 
-        return dto;
+
 
     }
 

@@ -2,8 +2,7 @@ package com.alkemy.disney.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
@@ -14,5 +13,5 @@ import java.util.List;
 public class ApiErrorDTO {
     private HttpStatus status;
     private String message;
-    private List<String> errror;
+    private List<String> error;
 }

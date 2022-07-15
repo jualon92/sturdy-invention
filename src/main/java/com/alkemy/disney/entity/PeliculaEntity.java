@@ -1,8 +1,7 @@
-package com.alkemy.disney.Entity;
+package com.alkemy.disney.entity;
 
 
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -65,7 +64,7 @@ public class PeliculaEntity {
 
         personajes.add(personaje);
 
-    };
-    public void removePersonaje(PersonajeEntity personaje){  personajes.remove(personaje);};
+    }
+    public void removePersonaje(PersonajeEntity personaje){  personajes.remove(personaje);}
 
 }

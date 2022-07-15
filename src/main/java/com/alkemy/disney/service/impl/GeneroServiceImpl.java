@@ -1,6 +1,6 @@
 package com.alkemy.disney.service.impl;
 
-import com.alkemy.disney.Entity.GeneroEntity;
+import com.alkemy.disney.entity.GeneroEntity;
 import com.alkemy.disney.dto.GeneroDTO;
 import com.alkemy.disney.mapper.GeneroMapper;
 import com.alkemy.disney.repository.GeneroRepository;
@@ -22,8 +22,8 @@ public class GeneroServiceImpl implements GeneroService {
 
     public List<GeneroDTO> getAllGeneros(){
          List<GeneroEntity> generosEntities = generoRepository.findAll();
-         List<GeneroDTO> generosDTO = generoMapper.generoEntity2DTOList(generosEntities);
-         return generosDTO;
+         return  generoMapper.generoEntity2DTOList(generosEntities);
+
 
 
     }

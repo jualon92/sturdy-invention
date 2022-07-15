@@ -1,6 +1,6 @@
 package com.alkemy.disney.service.impl;
 
-import com.alkemy.disney.Entity.PersonajeEntity;
+import com.alkemy.disney.entity.PersonajeEntity;
 import com.alkemy.disney.dto.CharacterDTO;
 import com.alkemy.disney.dto.PersonajeFiltersDTO;
 import com.alkemy.disney.exception.ParamNotFound;
@@ -38,8 +38,7 @@ public class CharacterServiceImpl implements CharacterService {
         }
 
 
-        List<CharacterDTO> dtos = personajeMapper.personajeEntity2DTOListIdentity(entities);
-        return dtos;
+        return  personajeMapper.personajeEntity2DTOListIdentity(entities);
 
     }
 }

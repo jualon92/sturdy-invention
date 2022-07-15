@@ -1,7 +1,7 @@
 package com.alkemy.disney.service.impl;
 
-import com.alkemy.disney.Entity.PeliculaEntity;
-import com.alkemy.disney.Entity.PersonajeEntity;
+import com.alkemy.disney.entity.PeliculaEntity;
+import com.alkemy.disney.entity.PersonajeEntity;
 import com.alkemy.disney.dto.*;
 import com.alkemy.disney.exception.ParamNotFound;
 import com.alkemy.disney.mapper.PeliculaMapper;
@@ -53,8 +53,8 @@ public class MovieServiceImpl implements MovieService  {
         List<MovieDTO> movies = peliculaMapper.peliculasToMoviesList(dtos);*/
 
         //movieDTO is a subset of PeliculaDTO with limited information.  maps peliculaEntity to a collection of moviesDTO
-        List<MovieDTO> movies = peliculaMapper.peliculaEntity2DTOMovies(entities);
-        return  movies;
+        return peliculaMapper.peliculaEntity2DTOMovies(entities);
+
     }
 
 
@@ -70,10 +70,10 @@ public class MovieServiceImpl implements MovieService  {
         if (!foundPelicula.isPresent()){
             throw new ParamNotFound("Id pelicula no valida"); // rest exception handler should catch param not found
         }
-
+        /*
         foundPersonaje.get().getPeliculas().size();
         foundPelicula.get().getPersonajes().size();
-
+    */
         PersonajeEntity personajeEntity = foundPersonaje.get();
         PeliculaEntity peliculaEntity = foundPelicula.get();
 
@@ -93,16 +93,16 @@ public class MovieServiceImpl implements MovieService  {
         Optional<PeliculaEntity> foundPelicula = peliculaRepository.findById(idPelicula);  //dos entities buscadas
         Optional<PersonajeEntity> foundPersonaje = personajeRepository.findById(idPersonaje);
 
-        if (!foundPersonaje.isPresent()){
+        if (foundPersonaje.isEmpty()){
             throw new ParamNotFound("Id personaje no valida"); // rest exception handler should catch param not found
         }
-        if (!foundPelicula.isPresent()){
+        if (foundPelicula.isEmpty()){
             throw new ParamNotFound("Id pelicula no valida"); // rest exception handler should catch param not found
         }
-
+        /*
         foundPersonaje.get().getPeliculas().size();
         foundPelicula.get().getPersonajes().size();
-
+        */
         PersonajeEntity personajeEntity = foundPersonaje.get();
         PeliculaEntity peliculaEntity = foundPelicula.get();
 

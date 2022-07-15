@@ -1,7 +1,6 @@
-package com.alkemy.disney.Entity;
+package com.alkemy.disney.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;

@@ -1,7 +1,6 @@
 package com.alkemy.disney.controller;
 
 import com.alkemy.disney.dto.PeliculaDTO;
-import com.alkemy.disney.dto.PersonajeDTO;
 import com.alkemy.disney.service.PeliculaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

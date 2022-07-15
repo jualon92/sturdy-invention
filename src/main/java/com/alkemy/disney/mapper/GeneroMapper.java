@@ -1,7 +1,7 @@
 package com.alkemy.disney.mapper;
 
 
-import com.alkemy.disney.Entity.GeneroEntity;
+import com.alkemy.disney.entity.GeneroEntity;
 import com.alkemy.disney.dto.GeneroDTO;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +30,7 @@ public class GeneroMapper {
 
     public List<GeneroDTO> generoEntity2DTOList(List<GeneroEntity> entitiesIniciales){
 
-        List<GeneroDTO> dtosFinal = new ArrayList<GeneroDTO>();
+        List<GeneroDTO> dtosFinal = new ArrayList<>();
 
         /*
         for (int i = 0; i < entitiesIniciales.size(); i++){

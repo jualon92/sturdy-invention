@@ -1,7 +1,7 @@
 package com.alkemy.disney.mapper;
 
-import com.alkemy.disney.Entity.PeliculaEntity;
-import com.alkemy.disney.Entity.PersonajeEntity;
+import com.alkemy.disney.entity.PeliculaEntity;
+import com.alkemy.disney.entity.PersonajeEntity;
 import com.alkemy.disney.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -44,36 +44,8 @@ public class PeliculaMapper {
     }
 
 
-    public PeliculaEntity peliculaDTO2EntitySimple(PeliculaDTO dto){
-        PeliculaEntity peliculaEntity = new PeliculaEntity();
 
 
-        peliculaEntity.setImagen(dto.getImagen());
-        peliculaEntity.setTitulo(dto.getTitulo());
-        peliculaEntity.setFechaDeCreacion(dto.getFechaDeCreacion());
-        peliculaEntity.setCalificacion(dto.getCalificacion());
-        peliculaEntity.setGeneroId(dto.getGeneroId());
-
-
-        return peliculaEntity;
-    }
-    /*
-    public List<MovieDTO> peliculasToMoviesList(List<PeliculaDTO> peliculas){
-        List <MovieDTO> movies = new ArrayList<>();
-        for (PeliculaDTO pelicula : peliculas
-             ) {
-            movies.add(peliculaToMovieDTO(pelicula));
-        }
-        return movies;
-    }*/
-    /*
-    public MovieDTO peliculaToMovieDTO(PeliculaDTO pelicula){
-        MovieDTO movie = new MovieDTO();
-        movie.setTitulo(pelicula.getTitulo());
-        movie.setFechaDeCreacion(pelicula.getFechaDeCreacion());
-        movie.setGeneroId(pelicula.getGeneroId());
-        return movie;
-    }*/
 
     public PeliculaDTO peliculaEntity2DTO(PeliculaEntity entity, boolean loadPersonajes){
         PeliculaDTO peliculaDTO = new PeliculaDTO();
@@ -96,19 +68,7 @@ public class PeliculaMapper {
 
 
 
-    public PeliculaDTO peliculaEntity2DTOSimple(PeliculaEntity entity){
-        PeliculaDTO peliculaDTO = new PeliculaDTO();
-        peliculaDTO.setId(entity.getId());
-        peliculaDTO.setImagen(entity.getImagen());
-        peliculaDTO.setTitulo(entity.getTitulo());
-        peliculaDTO.setFechaDeCreacion(entity.getFechaDeCreacion());
-        peliculaDTO.setCalificacion(entity.getCalificacion());
-        peliculaDTO.setGeneroId(entity.getGeneroId());
 
-
-
-        return peliculaDTO;
-    }
 
 
 
@@ -129,22 +89,7 @@ public class PeliculaMapper {
         System.out.println(dtosFinal);
         return dtosFinal;
     }
-    /*
-    public List<MovieDTO>    movieEntity2DTOList(Collection<PeliculaEntity> entitiesIniciales, boolean loadPersonajes){
 
-        List<MovieDTO> dtosFinal = new ArrayList<>();
-
-
-
-        for (PeliculaEntity pelicula: entitiesIniciales
-        ) {
-            MovieDTO newDTO = this.movieEntity2DTO(pelicula, loadPersonajes);
-            dtosFinal.add(newDTO);
-
-        }
-        return dtosFinal;
-    }
-    */
 
 
 
