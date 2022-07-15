@@ -59,4 +59,11 @@ public class PeliculaEntity {
     private List<PersonajeEntity> personajes = new ArrayList<>();
 
 
+    public void addPersonaje(PersonajeEntity personaje) {
+
+        personajes.add(personaje);
+
+    };
+    public void removePersonaje(PersonajeEntity personaje){  personajes.remove(personaje);};
+
 }

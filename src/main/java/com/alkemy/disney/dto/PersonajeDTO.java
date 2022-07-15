@@ -10,11 +10,11 @@ import java.util.List;
 public class PersonajeDTO { //plain class
     private long id;
 
-    private String imagen;
-    private String nombre;
-    private Long edad;
-    private Long peso;
-    private String historia;
-    private List<PeliculaDTO> peliculas;
+        private String imagen;
+        private String nombre;
+        private Long edad;
+        private Long peso;
+        private String historia;
+        private List<PeliculaDTO> peliculas;
 
 }

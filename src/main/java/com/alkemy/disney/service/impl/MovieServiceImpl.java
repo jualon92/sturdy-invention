@@ -8,6 +8,8 @@ import com.alkemy.disney.mapper.PeliculaMapper;
 import com.alkemy.disney.mapper.PersonajeMapper;
 import com.alkemy.disney.repository.CharacterRepository;
 import com.alkemy.disney.repository.MovieRepository;
+import com.alkemy.disney.repository.PeliculaRepository;
+import com.alkemy.disney.repository.PersonajeRepository;
 import com.alkemy.disney.repository.specifications.CharacterSpecification;
 import com.alkemy.disney.repository.specifications.MovieSpecification;
 import com.alkemy.disney.service.MovieService;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -23,6 +26,13 @@ public class MovieServiceImpl implements MovieService  {
 
     @Autowired
     private MovieRepository movieRepository;
+
+    @Autowired
+    private PersonajeRepository personajeRepository;
+
+    @Autowired
+    private PeliculaRepository peliculaRepository;
+
 
     @Autowired
     private MovieSpecification movieSpecification;
@@ -50,6 +60,65 @@ public class MovieServiceImpl implements MovieService  {
         //movieDTO is a subset of PeliculaDTO with limited information.  maps peliculaEntity to a collection of moviesDTO
         List<MovieDTO> movies = peliculaMapper.peliculaEntity2DTOMovies(entities);
         return  movies;
+    }
+
+
+    //ADD PELICULA
+    public void addPersonaje(Long idPelicula, Long idPersonaje){
+
+        Optional<PeliculaEntity> foundPelicula = peliculaRepository.findById(idPelicula);  //dos entities buscadas
+        Optional<PersonajeEntity> foundPersonaje = personajeRepository.findById(idPersonaje);
+
+        if (!foundPersonaje.isPresent()){
+            throw new ParamNotFound("Id personaje no valida"); // rest exception handler should catch param not found
+        }
+        if (!foundPelicula.isPresent()){
+            throw new ParamNotFound("Id pelicula no valida"); // rest exception handler should catch param not found
+        }
+
+        foundPersonaje.get().getPeliculas().size();
+        foundPelicula.get().getPersonajes().size();
+
+        PersonajeEntity personajeEntity = foundPersonaje.get();
+        PeliculaEntity peliculaEntity = foundPelicula.get();
+
+
+        //update and save
+        peliculaEntity.addPersonaje(personajeEntity);
+
+
+        this.peliculaRepository.save(peliculaEntity);
+
+
+    }
+
+
+    public void removePersonaje(Long idPelicula, Long idPersonaje){
+
+        Optional<PeliculaEntity> foundPelicula = peliculaRepository.findById(idPelicula);  //dos entities buscadas
+        Optional<PersonajeEntity> foundPersonaje = personajeRepository.findById(idPersonaje);
+
+        if (!foundPersonaje.isPresent()){
+            throw new ParamNotFound("Id personaje no valida"); // rest exception handler should catch param not found
+        }
+        if (!foundPelicula.isPresent()){
+            throw new ParamNotFound("Id pelicula no valida"); // rest exception handler should catch param not found
+        }
+
+        foundPersonaje.get().getPeliculas().size();
+        foundPelicula.get().getPersonajes().size();
+
+        PersonajeEntity personajeEntity = foundPersonaje.get();
+        PeliculaEntity peliculaEntity = foundPelicula.get();
+
+
+        //update and save
+        peliculaEntity.removePersonaje(personajeEntity);
+
+
+        this.peliculaRepository.save(peliculaEntity);
+
+
     }
 }
 

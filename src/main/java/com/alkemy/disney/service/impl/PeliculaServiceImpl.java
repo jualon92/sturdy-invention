@@ -64,5 +64,6 @@ public class PeliculaServiceImpl implements PeliculaService {
         return peliculaMapper.peliculaEntity2DTO(peliculaEntity, true);
     }
 
+
 }
 

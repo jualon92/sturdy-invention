@@ -8,4 +8,6 @@ import java.util.Set;
 
 public interface MovieService {
     List<MovieDTO> getByFilters(String name,  Long idGenero, String order);
+    void addPersonaje(Long idPelicula, Long idPersonaje);
+    void removePersonaje(Long idPelicula, Long idPersonaje);
 }

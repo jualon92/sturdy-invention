@@ -97,33 +97,4 @@ public class PersonajeServiceImpl implements PersonajeService{
 
     }
 
-    //ADD PELICULA
-    public void addPelicula(Long id, Long idPelicula){
-
-        Optional<PersonajeEntity> foundPersonaje= personajeRepository.findById(id);  //dos entities buscadas
-        Optional<PeliculaEntity> foundPelicula = peliculaRepository.findById(idPelicula);
-        System.out.println("pre");
-        System.out.println(personajeRepository.findById(id).get().getPeliculas());
-        if (!foundPersonaje.isPresent()){
-            throw new ParamNotFound("Id personaje no valida"); // rest exception handler should catch param not found
-        }
-        if (!foundPelicula.isPresent()){
-            throw new ParamNotFound("Id pelicula no valida"); // rest exception handler should catch param not found
-        }
-
-        foundPersonaje.get().getPeliculas().size();
-        foundPelicula.get().getPersonajes().size();
-
-        PersonajeEntity personajeEntity = foundPersonaje.get();
-        PeliculaEntity peliculaEntity = foundPelicula.get();
-
-
-        //update and save
-          personajeEntity.addPelicula(peliculaEntity);
-
-
-          this.personajeRepository.save(personajeEntity);
-
-
-    }
 }

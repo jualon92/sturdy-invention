@@ -37,11 +37,4 @@ public class PersonajeEntity {
     private List<PeliculaEntity> peliculas = new ArrayList<>();
 
 
-    public void addPelicula(PeliculaEntity pelicula) {
-        System.out.println("agregando");
-        peliculas.add(pelicula);
-        System.out.println(this.getPeliculas());
-    };
-    public void removePelicula(PeliculaEntity pelicula){  peliculas.remove(pelicula);};
-
 }
