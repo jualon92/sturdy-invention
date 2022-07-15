@@ -5,21 +5,16 @@ import com.alkemy.disney.Entity.PersonajeEntity;
 import com.alkemy.disney.dto.*;
 import com.alkemy.disney.exception.ParamNotFound;
 import com.alkemy.disney.mapper.PeliculaMapper;
-import com.alkemy.disney.mapper.PersonajeMapper;
-import com.alkemy.disney.repository.CharacterRepository;
 import com.alkemy.disney.repository.MovieRepository;
 import com.alkemy.disney.repository.PeliculaRepository;
 import com.alkemy.disney.repository.PersonajeRepository;
-import com.alkemy.disney.repository.specifications.CharacterSpecification;
 import com.alkemy.disney.repository.specifications.MovieSpecification;
 import com.alkemy.disney.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class MovieServiceImpl implements MovieService  {
