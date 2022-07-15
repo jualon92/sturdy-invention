@@ -64,16 +64,16 @@ public class MovieServiceImpl implements MovieService  {
         Optional<PeliculaEntity> foundPelicula = peliculaRepository.findById(idPelicula);  //dos entities buscadas
         Optional<PersonajeEntity> foundPersonaje = personajeRepository.findById(idPersonaje);
 
-        if (!foundPersonaje.isPresent()){
+        if (foundPersonaje.isEmpty()){
             throw new ParamNotFound("Id personaje no valida"); // rest exception handler should catch param not found
         }
-        if (!foundPelicula.isPresent()){
+        if (foundPelicula.isEmpty()){
             throw new ParamNotFound("Id pelicula no valida"); // rest exception handler should catch param not found
         }
         /*
         foundPersonaje.get().getPeliculas().size();
         foundPelicula.get().getPersonajes().size();
-    */
+        */
         PersonajeEntity personajeEntity = foundPersonaje.get();
         PeliculaEntity peliculaEntity = foundPelicula.get();
 

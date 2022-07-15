@@ -57,7 +57,7 @@ public class PersonajeServiceImpl implements PersonajeService{
 
 
         Optional<PersonajeEntity> foundEntity = personajeRepository.findById(id);
-        if (!foundEntity.isPresent()){
+        if (foundEntity.isEmpty()){
             throw new ParamNotFound("Id personaje no valida"); // rest exception handler should catch param not found
         }
 
@@ -70,7 +70,7 @@ public class PersonajeServiceImpl implements PersonajeService{
 
     public PersonajeDTO update(Long id, PersonajeDTO personajeDTO){
         Optional<PersonajeEntity> foundEntity = personajeRepository.findById(id);
-        if (!foundEntity.isPresent()){
+        if (foundEntity.isEmpty()){
             throw new ParamNotFound("Id personaje no valida"); // rest exception handler should catch param not found
         }
 
@@ -85,7 +85,7 @@ public class PersonajeServiceImpl implements PersonajeService{
 
         //checks if it exists in the first place
         Optional<PersonajeEntity> foundEntity = personajeRepository.findById(id);
-        if (!foundEntity.isPresent()){
+        if (foundEntity.isEmpty()){
             throw new ParamNotFound("Id personaje no valida"); // rest exception handler should catch param not found
         }
 
