@@ -2,6 +2,7 @@ package com.alkemy.disney.Entity;
 
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -17,6 +18,7 @@ import javax.validation.constraints.Min;
 @Table(name = "Pelicula")
 @Getter
 @Setter
+
 public class PeliculaEntity {
 
     @Id
