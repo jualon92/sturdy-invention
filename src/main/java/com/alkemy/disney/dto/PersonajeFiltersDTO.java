@@ -13,17 +13,17 @@ public class PersonajeFiltersDTO {
     private Long edad;
     private Long peso;
     private Set<Long> peliculas;
-    private String order;
+  /*  private String order;*/
 
     public PersonajeFiltersDTO(String nombre, Long edad, Long peso, Set<Long> peliculas, String order) {
         this.nombre = nombre;
         this.edad = edad;
         this.peso = peso;
         this.peliculas = peliculas;
-        this.order = order;
+      //  this.order = order;
     }
 
-
+    /*
     public boolean isASC() { return order.compareToIgnoreCase("ASC") == 0;}
-    public boolean isDESC() { return order.compareToIgnoreCase("DESC") == 0;}
+    public boolean isDESC() { return order.compareToIgnoreCase("DESC") == 0;}*/
 }

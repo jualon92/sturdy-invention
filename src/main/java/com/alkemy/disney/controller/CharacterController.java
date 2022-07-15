@@ -1,8 +1,8 @@
 package com.alkemy.disney.controller;
 
 
+import com.alkemy.disney.dto.CharacterDTO;
 import com.alkemy.disney.service.CharacterService;
-import com.alkemy.disney.dto.PersonajeDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,14 +18,14 @@ public class CharacterController {
     CharacterService characterService;
     //  sql query with dynamic params
     @GetMapping
-    public ResponseEntity<List<PersonajeDTO>> getDetailsByFilters(
+    public ResponseEntity<List<CharacterDTO>> getDetailsByFilters(
             @RequestParam(required = false) String nombre,
             @RequestParam(required = false) Long edad,
             @RequestParam(required = false) Long peso,
             @RequestParam(required = false) Set<Long> peliculas,
             @RequestParam(required = false, defaultValue = "ASC") String order
     ){
-        List<PersonajeDTO> personajes = characterService.getByFilters(nombre,edad,peso,peliculas,order);
+        List<CharacterDTO> personajes = characterService.getByFilters(nombre,edad,peso,peliculas,order);
         return ResponseEntity.ok(personajes);
 
     }

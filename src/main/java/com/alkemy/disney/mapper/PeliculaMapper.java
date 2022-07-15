@@ -2,9 +2,7 @@ package com.alkemy.disney.mapper;
 
 import com.alkemy.disney.Entity.PeliculaEntity;
 import com.alkemy.disney.Entity.PersonajeEntity;
-import com.alkemy.disney.dto.PeliculaDTO;
-import com.alkemy.disney.dto.PersonajeDTO;
-import com.alkemy.disney.dto.PersonajeDTOBasic;
+import com.alkemy.disney.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -37,7 +35,13 @@ public class PeliculaMapper {
     }
 
 
+    public void updateAtributes(PeliculaEntity peliculaEntity, PeliculaDTO dto){
+        peliculaEntity.setImagen(dto.getImagen());
+        peliculaEntity.setTitulo(dto.getTitulo());
+        peliculaEntity.setFechaDeCreacion(dto.getFechaDeCreacion());
+        peliculaEntity.setCalificacion(dto.getCalificacion());
 
+    }
 
 
     public PeliculaEntity peliculaDTO2EntitySimple(PeliculaDTO dto){
@@ -53,8 +57,23 @@ public class PeliculaMapper {
 
         return peliculaEntity;
     }
-
-
+    /*
+    public List<MovieDTO> peliculasToMoviesList(List<PeliculaDTO> peliculas){
+        List <MovieDTO> movies = new ArrayList<>();
+        for (PeliculaDTO pelicula : peliculas
+             ) {
+            movies.add(peliculaToMovieDTO(pelicula));
+        }
+        return movies;
+    }*/
+    /*
+    public MovieDTO peliculaToMovieDTO(PeliculaDTO pelicula){
+        MovieDTO movie = new MovieDTO();
+        movie.setTitulo(pelicula.getTitulo());
+        movie.setFechaDeCreacion(pelicula.getFechaDeCreacion());
+        movie.setGeneroId(pelicula.getGeneroId());
+        return movie;
+    }*/
 
     public PeliculaDTO peliculaEntity2DTO(PeliculaEntity entity, boolean loadPersonajes){
         PeliculaDTO peliculaDTO = new PeliculaDTO();
@@ -72,6 +91,10 @@ public class PeliculaMapper {
 
         return peliculaDTO;
     }
+
+
+
+
 
     public PeliculaDTO peliculaEntity2DTOSimple(PeliculaEntity entity){
         PeliculaDTO peliculaDTO = new PeliculaDTO();
@@ -106,6 +129,25 @@ public class PeliculaMapper {
         System.out.println(dtosFinal);
         return dtosFinal;
     }
+    /*
+    public List<MovieDTO>    movieEntity2DTOList(Collection<PeliculaEntity> entitiesIniciales, boolean loadPersonajes){
+
+        List<MovieDTO> dtosFinal = new ArrayList<>();
+
+
+
+        for (PeliculaEntity pelicula: entitiesIniciales
+        ) {
+            MovieDTO newDTO = this.movieEntity2DTO(pelicula, loadPersonajes);
+            dtosFinal.add(newDTO);
+
+        }
+        return dtosFinal;
+    }
+    */
+
+
+
 
     public List<PeliculaEntity> peliculaDTO2EntityList(Collection<PeliculaDTO> dtoIniciales, boolean loadPersonajes){
 
@@ -122,6 +164,33 @@ public class PeliculaMapper {
 
         return entitiesArr;
     }
+
+    public List<MovieDTO> peliculaEntity2DTOMovies(Collection<PeliculaEntity> entitiesIniciales){
+
+        List<MovieDTO> dtosFinal = new ArrayList<>();
+
+
+        for (PeliculaEntity pelicula: entitiesIniciales
+        ) {
+            MovieDTO newDTO = peliculaEntity2DTOMovie(pelicula);
+            dtosFinal.add(newDTO);
+
+        }
+
+
+        return dtosFinal;
+    }
+
+
+    public MovieDTO peliculaEntity2DTOMovie(PeliculaEntity entity){
+        MovieDTO movieDTO = new MovieDTO();
+
+        movieDTO.setImagen(entity.getImagen());
+        movieDTO.setTitulo(entity.getTitulo());
+        movieDTO.setFechaDeCreacion(entity.getFechaDeCreacion());
+        return movieDTO;
+    }
+
 
 }
 

@@ -2,6 +2,7 @@ package com.alkemy.disney.repository.specifications;
 
 import com.alkemy.disney.Entity.PeliculaEntity;
 import com.alkemy.disney.Entity.PersonajeEntity;
+import com.alkemy.disney.dto.MovieFiltersDTO;
 import com.alkemy.disney.dto.PersonajeFiltersDTO;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
@@ -18,25 +19,25 @@ import java.util.List;
 import javax.persistence.criteria.Join;
 
 @Component
-public class CharacterSpecification {
+public class MovieSpecification {
 
-    public Specification<PersonajeEntity> getByFilters(PersonajeFiltersDTO filtersDTO){
+    public Specification<PeliculaEntity> getByFilters(MovieFiltersDTO filtersDTO){
         return (root, query, criteriaBuilder) -> {
 
             List<Predicate> predicates = new ArrayList<>();
-            System.out.println(filtersDTO.getNombre());
-            //filter by name
-            if(StringUtils.hasLength(filtersDTO.getNombre())){ //if name exists
-                System.out.println(filtersDTO.getNombre());
+            System.out.println(filtersDTO.getTitulo());
+            //filter by Title
+            if(StringUtils.hasLength(filtersDTO.getTitulo())){ //if name exists
+                System.out.println(filtersDTO.getTitulo());
                 predicates.add(
                         criteriaBuilder.like(
-                                criteriaBuilder.lower(root.get("nombre")),
-                                "%" + filtersDTO.getNombre().toLowerCase() + "%"
+                                criteriaBuilder.lower(root.get("titulo")),
+                                "%" + filtersDTO.getTitulo().toLowerCase() + "%"
                         )
                 );
             }
-
-            //filter by edad
+            /*
+            //filter by idGenero
             if(filtersDTO.getEdad() != null){// Long wrapper defaults to 0
                 Long edad = filtersDTO.getEdad();
                 predicates.add(
@@ -44,18 +45,18 @@ public class CharacterSpecification {
                         )
                 );
             }
+            */
 
-
-            //filter by peso
-            if(filtersDTO.getPeso() != null){// Long wrapper defaults to 0
-                Long edad = filtersDTO.getPeso();
+            //filter by genero id
+            if(filtersDTO.getIdGenero() != null){// Long wrapper defaults to 0
+                Long generoId = filtersDTO.getIdGenero();
                 predicates.add(
-                        criteriaBuilder.equal(root.<Long>get("peso"),edad
+                        criteriaBuilder.equal(root.<Long>get("generoId"),generoId
                         )
                 );
             }
 
-
+            /*
             //movies that he/she was in
             if (!CollectionUtils.isEmpty(filtersDTO.getPeliculas())){
                 Join<PeliculaEntity,PersonajeEntity> join = root.join("peliculas", JoinType.INNER);
@@ -63,17 +64,17 @@ public class CharacterSpecification {
                 predicates.add(peliculasId.in(filtersDTO.getPeliculas()));
 
 
-            }
+            }   */
 
             query.distinct(true); //remove repeated
 
-            String orderByField = "nombre";
+            String orderByField = "fechaDeCreacion";
 
-            /*
+
             query.orderBy(   // if filter isAsc, order asc by nombre,  else order desc
                     filtersDTO.isASC() ?
                             criteriaBuilder.asc(root.get(orderByField)) : criteriaBuilder.desc(root.get(orderByField))
-            );*/
+            );
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
 

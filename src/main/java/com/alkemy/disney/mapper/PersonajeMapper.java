@@ -4,6 +4,7 @@ import com.alkemy.disney.Entity.PeliculaEntity;
 import com.alkemy.disney.dto.PeliculaDTO;
 import com.alkemy.disney.dto.PersonajeDTO;
 import com.alkemy.disney.dto.PersonajeDTOBasic;
+import com.alkemy.disney.dto.CharacterDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -74,6 +75,17 @@ public class PersonajeMapper {
 
         return personajeDTO;
     }
+
+
+    public CharacterDTO personajeEntity2DTOIdentity(PersonajeEntity entity){
+        CharacterDTO personajeDTO = new CharacterDTO();
+
+        personajeDTO.setImagen(entity.getImagen());
+        personajeDTO.setNombre(entity.getNombre());
+
+        return personajeDTO;
+    }
+
 
     public PersonajeDTOBasic personajeEntity2DTOBasic(PersonajeEntity entity){
         PersonajeDTOBasic personajeDTOBasic = new PersonajeDTOBasic();
@@ -156,6 +168,32 @@ public class PersonajeMapper {
 
         return dtosFinal;
     }
+
+
+    public List<CharacterDTO> personajeEntity2DTOListIdentity(Collection<PersonajeEntity> entitiesIniciales){
+
+        List<CharacterDTO> dtosFinal = new ArrayList<>();
+
+        /*
+        for (int i = 0; i < entitiesIniciales.size(); i++){
+            //converts entity to dto
+            GeneroDTO nuevoDTO = generoEntity2DTO(entities.get(i));
+            dtosFinal.add(nuevoDTO);
+        }*/
+
+        for (PersonajeEntity personaje: entitiesIniciales
+        ) {
+            CharacterDTO newDTO = personajeEntity2DTOIdentity(personaje);
+            dtosFinal.add(newDTO);
+
+        }
+
+
+        return dtosFinal;
+    }
+
+
+
 
 
     public List<PersonajeDTO> personajeEntity2DTOList(List<PersonajeEntity> entitiesIniciales, boolean loadPeliculas){

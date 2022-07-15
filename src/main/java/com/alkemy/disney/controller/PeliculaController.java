@@ -34,4 +34,12 @@ public class PeliculaController {
         return ResponseEntity.ok().body(peliculas); // returns if ok and body
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<PeliculaDTO> updatePelicula(@PathVariable Long id,@RequestBody PeliculaDTO pelicula ){
+        PeliculaDTO peliculaGuardado = peliculaService.update(id,pelicula);
+
+        //response 201  + data
+        return ResponseEntity.status(HttpStatus.CREATED).body(peliculaGuardado);  //response => header 201 (reason, value, etc) + json
+    }
+
 }

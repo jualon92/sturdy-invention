@@ -1,10 +1,10 @@
 package com.alkemy.disney.service;
 
-import com.alkemy.disney.dto.PersonajeDTO;
+import com.alkemy.disney.dto.CharacterDTO;
 
 import java.util.List;
 import java.util.Set;
 
 public interface CharacterService {
-     List<PersonajeDTO> getByFilters(String name, Long edad, Long peso, Set<Long> peliculas, String order);
+     List<CharacterDTO> getByFilters(String name, Long edad, Long peso, Set<Long> peliculas, String order);
 }
