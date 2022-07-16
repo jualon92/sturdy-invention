@@ -78,7 +78,7 @@ public class PersonajeMapper {
 
     public CharacterDTO personajeEntity2DTOIdentity(PersonajeEntity entity){
         CharacterDTO personajeDTO = new CharacterDTO();
-
+        personajeDTO.setId(entity.getId());
         personajeDTO.setImagen(entity.getImagen());
         personajeDTO.setNombre(entity.getNombre());
 

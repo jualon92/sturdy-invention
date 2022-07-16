@@ -7,7 +7,7 @@ import lombok.Setter;
 public class CharacterDTO {
 
     //reever sin id, consigna aclara solo imagen y nombre
-
+    private long id;
     private String imagen;
     private String nombre;
 

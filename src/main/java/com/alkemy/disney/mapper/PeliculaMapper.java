@@ -6,6 +6,7 @@ import com.alkemy.disney.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Component
@@ -18,9 +19,9 @@ public class PeliculaMapper {
     public PeliculaEntity peliculaDTO2Entity(PeliculaDTO dto){
         PeliculaEntity peliculaEntity = new PeliculaEntity();
 
-
         peliculaEntity.setImagen(dto.getImagen());
         peliculaEntity.setTitulo(dto.getTitulo());
+
         peliculaEntity.setFechaDeCreacion(dto.getFechaDeCreacion());
         peliculaEntity.setCalificacion(dto.getCalificacion());
         peliculaEntity.setGeneroId(dto.getGeneroId());
@@ -129,7 +130,7 @@ public class PeliculaMapper {
 
     public MovieDTO peliculaEntity2DTOMovie(PeliculaEntity entity){
         MovieDTO movieDTO = new MovieDTO();
-
+        movieDTO.setId(entity.getId());
         movieDTO.setImagen(entity.getImagen());
         movieDTO.setTitulo(entity.getTitulo());
         movieDTO.setFechaDeCreacion(entity.getFechaDeCreacion());

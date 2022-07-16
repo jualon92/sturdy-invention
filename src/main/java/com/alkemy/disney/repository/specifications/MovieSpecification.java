@@ -29,16 +29,7 @@ public class MovieSpecification {
                         )
                 );
             }
-            /*
-            //filter by idGenero
-            if(filtersDTO.getEdad() != null){// Long wrapper defaults to 0
-                Long edad = filtersDTO.getEdad();
-                predicates.add(
-                        criteriaBuilder.equal(root.<Long>get("edad"),edad
-                        )
-                );
-            }
-            */
+
 
             //filter by genero id
             if(filtersDTO.getIdGenero() != null){// Long wrapper defaults to 0
@@ -49,15 +40,7 @@ public class MovieSpecification {
                 );
             }
 
-            /*
-            //movies that he/she was in
-            if (!CollectionUtils.isEmpty(filtersDTO.getPeliculas())){
-                Join<PeliculaEntity,PersonajeEntity> join = root.join("peliculas", JoinType.INNER);
-                Expression<String> peliculasId = join.get("id");
-                predicates.add(peliculasId.in(filtersDTO.getPeliculas()));
 
-
-            }   */
 
             query.distinct(true); //remove repeated
 
