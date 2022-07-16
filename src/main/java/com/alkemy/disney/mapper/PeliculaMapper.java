@@ -39,6 +39,7 @@ public class PeliculaMapper {
     public void updateAtributes(PeliculaEntity peliculaEntity, PeliculaDTO dto){
         peliculaEntity.setImagen(dto.getImagen());
         peliculaEntity.setTitulo(dto.getTitulo());
+
         peliculaEntity.setFechaDeCreacion(dto.getFechaDeCreacion());
         peliculaEntity.setCalificacion(dto.getCalificacion());
 

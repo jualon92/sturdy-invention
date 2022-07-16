@@ -120,6 +120,7 @@ public class PersonajeMapper {
         personajeEntity.setEdad(personajeFinal.getEdad());
         personajeEntity.setHistoria(personajeFinal.getHistoria());
         personajeEntity.setImagen(personajeFinal.getImagen());
+        personajeEntity.setPeso(personajeFinal.getPeso());
         personajeEntity.setNombre(personajeFinal.getNombre());
 
     }
