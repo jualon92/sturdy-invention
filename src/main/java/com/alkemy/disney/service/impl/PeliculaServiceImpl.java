@@ -2,6 +2,7 @@ package com.alkemy.disney.service.impl;
 
 import com.alkemy.disney.entity.PeliculaEntity;
 import com.alkemy.disney.dto.PeliculaDTO;
+import com.alkemy.disney.exception.ErrorDispatcher;
 import com.alkemy.disney.exception.ParamNotFound;
 import com.alkemy.disney.mapper.PeliculaMapper;
 import com.alkemy.disney.repository.PeliculaRepository;
@@ -49,12 +50,8 @@ public class PeliculaServiceImpl implements PeliculaService {
 
 
     public PeliculaDTO update(Long id, PeliculaDTO personajeDTO){
-        Optional<PeliculaEntity> foundEntity = peliculaRepository.findById(id);
-        if (foundEntity.isEmpty()){
-            throw new ParamNotFound("Id personaje no valida"); // rest exception handler should catch param not found
-        }
+         PeliculaEntity peliculaEntity = peliculaRepository.findById(id).orElseThrow( () -> new ParamNotFound(ErrorDispatcher.PERSONAJENOTFOUND()));
 
-        PeliculaEntity peliculaEntity = foundEntity.get();
         peliculaMapper.updateAtributes(peliculaEntity, personajeDTO);
 
         peliculaRepository.save(peliculaEntity);

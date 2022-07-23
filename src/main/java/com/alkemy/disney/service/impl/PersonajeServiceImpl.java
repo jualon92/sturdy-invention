@@ -1,6 +1,7 @@
 package com.alkemy.disney.service.impl;
 
 import com.alkemy.disney.dto.PersonajeDTOBasic;
+import com.alkemy.disney.exception.ErrorDispatcher;
 import com.alkemy.disney.exception.ParamNotFound;
 import com.alkemy.disney.repository.PeliculaRepository;
 import com.alkemy.disney.repository.PersonajeRepository;
@@ -56,25 +57,19 @@ public class PersonajeServiceImpl implements PersonajeService{
     public PersonajeDTO getDetailsById(Long id){ //it needs some tests, i.e: get request with an invalid id
 
 
-        Optional<PersonajeEntity> foundEntity = personajeRepository.findById(id);
-        if (foundEntity.isEmpty()){
-            throw new ParamNotFound("Id personaje no valida"); // rest exception handler should catch param not found
-        }
+        PersonajeEntity  foundEntity = personajeRepository.findById(id).orElseThrow( () -> new ParamNotFound(ErrorDispatcher.PERSONAJENOTFOUND()));
 
 
-         return personajeMapper.personajeEntity2DTO(foundEntity.get(), true);
+         return personajeMapper.personajeEntity2DTO(foundEntity, true);
 
 
 
     }
 
     public PersonajeDTO update(Long id, PersonajeDTO personajeDTO){
-        Optional<PersonajeEntity> foundEntity = personajeRepository.findById(id);
-        if (foundEntity.isEmpty()){
-            throw new ParamNotFound("Id personaje no valida"); // rest exception handler should catch param not found
-        }
+        PersonajeEntity personajeEntity = personajeRepository.findById(id).orElseThrow( () -> new ParamNotFound(ErrorDispatcher.PERSONAJENOTFOUND()));
 
-        PersonajeEntity personajeEntity = foundEntity.get();
+
         personajeMapper.updateAtributes(personajeEntity, personajeDTO);
         personajeRepository.save(personajeEntity);
 
@@ -84,10 +79,8 @@ public class PersonajeServiceImpl implements PersonajeService{
     public void delete(Long id){
 
         //checks if it exists in the first place
-        Optional<PersonajeEntity> foundEntity = personajeRepository.findById(id);
-        if (foundEntity.isEmpty()){
-            throw new ParamNotFound("Id personaje no valida"); // rest exception handler should catch param not found
-        }
+         PersonajeEntity personajeEntity  = personajeRepository.findById(id).orElseThrow( () -> new ParamNotFound(ErrorDispatcher.PERSONAJENOTFOUND()));
+
 
 
         //soft delete

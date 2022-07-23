@@ -3,6 +3,7 @@ package com.alkemy.disney.service.impl;
 import com.alkemy.disney.entity.PeliculaEntity;
 import com.alkemy.disney.entity.PersonajeEntity;
 import com.alkemy.disney.dto.*;
+import com.alkemy.disney.exception.ErrorDispatcher;
 import com.alkemy.disney.exception.ParamNotFound;
 import com.alkemy.disney.mapper.PeliculaMapper;
 import com.alkemy.disney.repository.MovieRepository;
@@ -43,7 +44,6 @@ public class MovieServiceImpl implements MovieService  {
 
         List<PeliculaEntity> entities = movieRepository.findAll(movieSpecification.getByFilters(filtersDTO));
 
-
         if (entities.isEmpty()){  // error handling when returning empty list
             throw new ParamNotFound("No match! :("); // rest exception handler should catch param not found
         }
@@ -61,22 +61,8 @@ public class MovieServiceImpl implements MovieService  {
     //ADD PELICULA
     public void addPersonaje(Long idPelicula, Long idPersonaje){
 
-        Optional<PeliculaEntity> foundPelicula = peliculaRepository.findById(idPelicula);  //dos entities buscadas
-        Optional<PersonajeEntity> foundPersonaje = personajeRepository.findById(idPersonaje);
-
-        if (foundPersonaje.isEmpty()){
-            throw new ParamNotFound("Id personaje no valida"); // rest exception handler should catch param not found
-        }
-        if (foundPelicula.isEmpty()){
-            throw new ParamNotFound("Id pelicula no valida"); // rest exception handler should catch param not found
-        }
-        /*
-        foundPersonaje.get().getPeliculas().size();
-        foundPelicula.get().getPersonajes().size();
-        */
-        PersonajeEntity personajeEntity = foundPersonaje.get();
-        PeliculaEntity peliculaEntity = foundPelicula.get();
-
+        PeliculaEntity peliculaEntity = peliculaRepository.findById(idPelicula).orElseThrow( () -> new ParamNotFound(ErrorDispatcher.PERSONAJENOTFOUND())); //dos entities buscadas
+        PersonajeEntity  personajeEntity = personajeRepository.findById(idPersonaje).orElseThrow( () -> new ParamNotFound(ErrorDispatcher.PERSONAJENOTFOUND())); //dos entities buscadas
 
         //update and save
         peliculaEntity.addPersonaje(personajeEntity);
@@ -84,32 +70,16 @@ public class MovieServiceImpl implements MovieService  {
 
         this.peliculaRepository.save(peliculaEntity);
 
-
     }
 
 
     public void removePersonaje(Long idPelicula, Long idPersonaje){
 
-        Optional<PeliculaEntity> foundPelicula = peliculaRepository.findById(idPelicula);  //dos entities buscadas
-        Optional<PersonajeEntity> foundPersonaje = personajeRepository.findById(idPersonaje);
-
-        if (foundPersonaje.isEmpty()){
-            throw new ParamNotFound("Id personaje no valida"); // rest exception handler should catch param not found
-        }
-        if (foundPelicula.isEmpty()){
-            throw new ParamNotFound("Id pelicula no valida"); // rest exception handler should catch param not found
-        }
-        /*
-        foundPersonaje.get().getPeliculas().size();
-        foundPelicula.get().getPersonajes().size();
-        */
-        PersonajeEntity personajeEntity = foundPersonaje.get();
-        PeliculaEntity peliculaEntity = foundPelicula.get();
-
+        PeliculaEntity peliculaEntity = peliculaRepository.findById(idPelicula).orElseThrow( () -> new ParamNotFound(ErrorDispatcher.PELICULANOTFOUND())); //dos entities buscadas
+        PersonajeEntity  personajeEntity = personajeRepository.findById(idPersonaje).orElseThrow( () -> new ParamNotFound(ErrorDispatcher.PELICULANOTFOUND())); //dos entities buscadas
 
         //update and save
         peliculaEntity.removePersonaje(personajeEntity);
-
 
         this.peliculaRepository.save(peliculaEntity);
 
