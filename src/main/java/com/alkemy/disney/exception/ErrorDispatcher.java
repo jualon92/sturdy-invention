@@ -12,6 +12,9 @@ public class ErrorDispatcher {
         return "id Pelicula no encontrada";
     }
 
+    public static String  ERRORMAILNOTSENT(){
+        return "error al enviar mail";
+    }
 
 
 

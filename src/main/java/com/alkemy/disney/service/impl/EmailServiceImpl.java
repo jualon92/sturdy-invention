@@ -1,5 +1,7 @@
 package com.alkemy.disney.service.impl;
 
+import com.alkemy.disney.exception.ErrorDispatcher;
+import com.alkemy.disney.exception.ParamNotFound;
 import com.alkemy.disney.service.EmailService;
 import com.sendgrid.Method;
 
@@ -50,14 +52,10 @@ public class EmailServiceImpl implements EmailService {
             request.setMethod(Method.POST);
             request.setEndpoint("mail/send");
             request.setBody(mail.build());
-            Response response = sg.api(request);
 
-            System.out.println(response.getStatusCode());
-            System.out.println(response.getBody());
-            System.out.println(response.getHeaders());
 
         }catch(IOException ex){
-            System.out.println("error trying to send email");
+            throw new ParamNotFound(ErrorDispatcher.ERRORMAILNOTSENT());
         }
 
     }
